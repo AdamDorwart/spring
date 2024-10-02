@@ -43,7 +43,7 @@ macro    (configure_native_skirmish_ai mySourceDirRel_var additionalSources_var 
 
 		# Create a list of all the AIs own source files
 		get_native_sources_recursive(mySources "${mySourceDir}" "${myDir}")
-
+		enable_language(ASM)
 		# Compile the library
 		add_library(${myTarget} MODULE ${mySources} ${additionalSources} ${myVersionDepFile})
 		set_target_properties(${myTarget} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/data)
