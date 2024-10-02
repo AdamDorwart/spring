@@ -709,20 +709,20 @@ namespace CrashHandler
 
 		unw_cursor_t cursor;
 
-#if (defined(__arm__) || defined(__APPLE__))
+// #if (defined(__arm__) || defined(__APPLE__))
 		// ucontext_t and unw_context_t are not aliases here
 		unw_context_t thisctx;
 		unw_getcontext(&thisctx);
-#else
-		// Effective ucontext_t. If uc not supplied, use unw_getcontext
-		// locally. This is appropriate inside signal handlers.
-		ucontext_t thisctx;
-
-		if (uc == nullptr) {
-			unw_getcontext(&thisctx);
-			uc = &thisctx;
-		}
-#endif
+// #else
+// 		// Effective ucontext_t. If uc not supplied, use unw_getcontext
+// 		// locally. This is appropriate inside signal handlers.
+// 		ucontext_t thisctx;
+//
+// 		if (uc == nullptr) {
+// 			unw_getcontext(&thisctx);
+// 			uc = &thisctx;
+// 		}
+// #endif
 
 
 		char procbuffer[1024];
@@ -742,11 +742,11 @@ namespace CrashHandler
 		}
 		*/
 
-#if (defined(__arm__) || defined(__APPLE__))
+// #if (defined(__arm__) || defined(__APPLE__))
 		const int err = unw_init_local(&cursor, &thisctx);
-#else
-		const int err = unw_init_local(&cursor, uc);
-#endif
+// #else
+// 		const int err = unw_init_local(&cursor, uc);
+// #endif
 
 		if (err != 0) {
 			LOG_L(L_ERROR, "unw_init_local returned %d", err);

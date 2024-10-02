@@ -19,6 +19,7 @@ void good_fpu_init() { LOG_L(L_WARNING, "[%s] streflop is disabled", __func__); 
 
 #ifdef STREFLOP_SSE
 #elif STREFLOP_X87
+#elif STREFLOP_NEON
 #else
 	#error "streflop FP-math mode must be either SSE or X87"
 #endif
@@ -92,7 +93,7 @@ void good_fpu_control_registers(const char* text)
 	constexpr int x87_c = 0x0032; // signan
 
 #ifdef STREFLOP_H
-	streflop::fpenv_t fenv;
+	streflop::fenv_t fenv;
 	streflop::fegetenv(&fenv);
 
 	#if defined(STREFLOP_SSE)
@@ -139,6 +140,8 @@ void good_fpu_init()
 	LOG("[%s][STREFLOP_SSE]", __func__);
 	#elif (defined(STREFLOP_X87))
 	LOG("[%s][STREFLOP_X87]", __func__);
+	#elif (defined(STREFLOP_NEON))
+	LOG("[%s][STREFLOP_NEON]", __func__);
 	#else
 	#error
 	#endif
@@ -157,6 +160,8 @@ void good_fpu_init()
 	LOG_L(L_WARNING, "\tStreflop floating-point math is set to X87 mode");
 	LOG_L(L_WARNING, "\tThis may cause desyncs during multi-player games");
 	LOG_L(L_WARNING, "\tYour CPU is %s SSE-capable; consider %s", (sseFlag == 0)? "not": "", (sseFlag == 1)? "recompiling": "upgrading");
+	#elif (defined(STREFLOP_NEON))
+	LOG_L(L_WARNING, "\tStreflop NEON mode, glhf");
 	#else
 	#error
 	#endif

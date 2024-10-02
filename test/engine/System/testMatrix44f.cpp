@@ -1,6 +1,7 @@
 /* This file is part of the Spring engine (GPL v2 or later), see LICENSE.html */
 
-#include <xmmintrin.h> //SSE1
+// #include <xmmintrin.h> //SSE1
+#include "System/sse2neon.h"
 
 #include "System/Matrix44f.h"
 #include "System/float4.h"

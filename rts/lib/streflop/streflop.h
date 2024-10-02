@@ -13,15 +13,15 @@
 #define STREFLOP_H
 
 // protect against bad defines
-#if   defined(STREFLOP_SSE) && defined(STREFLOP_X87)
-#error You have to define exactly one of STREFLOP_SSE STREFLOP_X87 STREFLOP_SOFT, but you defined both STREFLOP_SSE and STREFLOP_X87
-#elif defined(STREFLOP_SSE) && defined(STREFLOP_SOFT)
-#error You have to define exactly one of STREFLOP_SSE STREFLOP_X87 STREFLOP_SOFT, but you defined both STREFLOP_SSE and STREFLOP_SOFT
-#elif defined(STREFLOP_X87) && defined(STREFLOP_SOFT)
-#error You have to define exactly one of STREFLOP_SSE STREFLOP_X87 STREFLOP_SOFT, but you defined both STREFLOP_X87 and STREFLOP_SOFT
-#elif !defined(STREFLOP_SSE) && !defined(STREFLOP_X87) && !defined(STREFLOP_SOFT)
-#error You have to define exactly one of STREFLOP_SSE STREFLOP_X87 STREFLOP_SOFT, but you defined none
-#endif
+// #if   defined(STREFLOP_SSE) && defined(STREFLOP_X87)
+// #error You have to define exactly one of STREFLOP_SSE STREFLOP_X87 STREFLOP_SOFT, but you defined both STREFLOP_SSE and STREFLOP_X87
+// #elif defined(STREFLOP_SSE) && defined(STREFLOP_SOFT)
+// #error You have to define exactly one of STREFLOP_SSE STREFLOP_X87 STREFLOP_SOFT, but you defined both STREFLOP_SSE and STREFLOP_SOFT
+// #elif defined(STREFLOP_X87) && defined(STREFLOP_SOFT)
+// #error You have to define exactly one of STREFLOP_SSE STREFLOP_X87 STREFLOP_SOFT, but you defined both STREFLOP_X87 and STREFLOP_SOFT
+// #elif !defined(STREFLOP_SSE) && !defined(STREFLOP_X87) && !defined(STREFLOP_SOFT)
+// #error You have to define exactly one of STREFLOP_SSE STREFLOP_X87 STREFLOP_SOFT, but you defined none
+// #endif
 
 // First, define the numerical types
 namespace streflop {
@@ -59,6 +59,13 @@ namespace streflop {
     typedef SoftFloatWrapper<64> Double;
     typedef SoftFloatWrapper<96> Extended;
     #define Extended Extended
+
+#elif defined(STREFLOP_NEON)
+
+    // NEON always uses native types, denormals are handled by FPU flags
+    typedef float Simple;
+    typedef double Double;
+    #undef Extended
 
 #else
 
