@@ -464,7 +464,7 @@ if (CMAKE_COMPILER_IS_GNUCXX)
 		endif (MARCH_BITS EQUAL 64)
 
 		# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=${FALLBACK_MARCH} -mtune=generic ${FALLBACK_SSE_FLAGS}")
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8-a+simd")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8-a+simd -ffp-contract=off")
 	endif (NOT MARCH_FLAG STREQUAL "generic")
 
 	# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SSE_FLAGS} -mfpmath=sse") #SSE_FLAGS are now user input only

@@ -51,11 +51,11 @@ void SpringMath::Init()
 	if (checksum == HEADING_CHECKSUM)
 		return;
 
-	// throw unsupported_error(
-	// 	"Invalid headingToVectorTable checksum. Most likely"
-	// 	" your streflop library was not compiled with the correct"
-	// 	" options, or you are not using streflop at all."
-	// );
+	throw unsupported_error(
+		"Invalid headingToVectorTable checksum. Most likely"
+		" your streflop library was not compiled with the correct"
+		" options, or you are not using streflop at all."
+	);
 #endif
 }
 
