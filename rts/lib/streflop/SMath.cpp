@@ -35,6 +35,8 @@ namespace streflop {
     fpenv_t FE_DFL_ENV = 0;
 #elif defined(STREFLOP_SSE)
     fpenv_t FE_DFL_ENV = {0,0};
+#elif defined(STREFLOP_NEON)
+    fenv_t FE_DFL_ENV = {0};
 #elif defined(STREFLOP_SOFT)
     fpenv_t FE_DFL_ENV = {42,0,0};
 #else

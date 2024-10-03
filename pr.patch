@@ -1,0 +1,36 @@
+diff --git a/src/Version.cpp b/src/Version.cpp
+index 300fa83..2ba270d 100644
+--- a/src/Version.cpp
++++ b/src/Version.cpp
+@@ -32,6 +32,8 @@ const char* platformToString(Platform platform)
+ 			return "linux64";
+ 		case Platform::Windows_x64:
+ 			return "windows64";
++		case Platform::Linux_arm64:
++			return "linuxArm64";
+ 		default:
+ 			// unreachable
+ 			std::abort();
+diff --git a/src/Version.h b/src/Version.h
+index 4c114df..c13d844 100644
+--- a/src/Version.h
++++ b/src/Version.h
+@@ -8,12 +8,17 @@ const char* getAgent();
+ enum class Platform {
+ 	Windows_x64,
+ 	Linux_x64,
++	Linux_arm64
+ };
+ 
+ #if defined(_WIN64)
+ constexpr Platform PRD_CURRENT_PLATFORM = Platform::Windows_x64;
+-#elif defined(__linux__) && defined(__x86_64__)
++#elif defined(__linux__)
++#if defined(__x86_64__)
+ constexpr Platform PRD_CURRENT_PLATFORM = Platform::Linux_x64;
++#else
++constexpr Platform PRD_CURRENT_PLATFORM = Platform::Linux_arm64;
++#endif
+ #endif
+ 
+ const char* platformToString(Platform Platform);

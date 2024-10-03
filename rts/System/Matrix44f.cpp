@@ -10,8 +10,9 @@
 #include <algorithm>
 #include <cstring>
 
-#include <xmmintrin.h>
-#include <emmintrin.h>
+// #include <xmmintrin.h>
+// #include <emmintrin.h>
+#include "System/sse2neon.h"
 
 CR_BIND(CMatrix44f, )
 

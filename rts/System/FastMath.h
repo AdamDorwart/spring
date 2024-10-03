@@ -4,7 +4,8 @@
 #define FASTMATH_H
 
 #ifndef DEDICATED_NOSSE
-#include <xmmintrin.h>
+// #include <xmmintrin.h>
+#include "System/sse2neon.h"
 #endif
 #include <cinttypes>
 

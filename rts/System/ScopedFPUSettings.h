@@ -18,7 +18,7 @@ public:
 		streflop::fesetenv(&fenv);
 	}
 private:
-	streflop::fpenv_t fenv;
+	streflop::fenv_t fenv;
 };
 
 #else
